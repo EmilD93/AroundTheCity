@@ -1,0 +1,10 @@
+const form=document.querySelector('#teamForm'), msg=document.querySelector('#msg');
+const raceFields=document.querySelector('#raceFields');
+function setRaceVisible(){raceFields.classList.toggle('hidden',document.querySelector('input[name=mode]:checked').value!=='race')}
+document.querySelectorAll('input[name=mode]').forEach(r=>r.addEventListener('change',setRaceVisible));
+const params=new URLSearchParams(location.search);const prefill=params.get('competition');if(prefill){document.querySelector('input[name=mode][value=race]').checked=true;competitionCode.value=prefill.toUpperCase();setRaceVisible()}
+form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='Създавам отбора…';const mode=document.querySelector('input[name=mode]:checked').value;const payload={team_name:teamName.value,players:players.value.split(/\n|,/).map(x=>x.trim()).filter(Boolean),mode,competition_code:competitionCode.value||null,competition_name:competitionName.value||null};let r=await fetch('/api/teams',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});let d=await r.json();if(!r.ok){msg.textContent=d.detail||'Грешка';return}localStorage.setItem('sofiaQuestToken',d.token);if(d.competition_code)localStorage.setItem('sofiaQuestCompetition',d.competition_code);if(d.organizer_token)localStorage.setItem('sofiaQuestOrganizerToken',d.organizer_token);
+ const f=teamLogo.files[0];if(f){msg.textContent='Качвам снимката на отбора…';const fd=new FormData();fd.append('file',f);r=await fetch('/api/team-logo?token='+encodeURIComponent(d.token),{method:'POST',body:fd});const ud=await r.json();if(!r.ok){msg.textContent='Отборът е създаден, но снимката не се качи: '+(ud.detail||'Грешка');return}}
+ location.href=d.organizer_token?'/organizer':'/play'});
+document.querySelector('#resume').onclick=()=>{const t=localStorage.getItem('sofiaQuestToken');if(t)location.href='/play';else msg.textContent='На това устройство няма запазена активна игра.'};
+const org=localStorage.getItem('sofiaQuestOrganizerToken');if(org){organizerResume.classList.remove('hidden');organizerResume.onclick=()=>location.href='/organizer'}
