@@ -1,1 +1,44 @@
-<!doctype html><html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Игра | Sofia City Quest</title><link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></head><body><main class="shell game-shell"><header class="game-top"><div class="team-heading"><img id="teamLogo" class="team-logo hidden" alt="Лого на отбора"><div><div class="eyebrow">SOFIA CITY QUEST</div><h1 id="teamTitle">Отбор</h1><div id="competitionInfo" class="muted"></div></div></div><div class="timer-wrap"><div class="timer-label">ОБЩО ВРЕМЕ</div><div id="timer" class="timer">00:00:00</div><div id="penalty" class="penalty">наказание +00:00</div></div></header><section class="progress-card"><div id="progressText">Мисия 0/10</div><div class="progress"><div id="progressBar"></div></div></section><section id="readyCard" class="card hidden"><h2 id="readyTitle">Готови ли сте?</h2><p id="readyText">Отидете в градина „Кристал“. Таймерът стартира след натискане на бутона и не спира при затваряне на сайта.</p><button id="startBtn" class="primary">Старт</button></section><section id="missionCard" class="card hidden"><div class="mission-meta"><span id="difficulty"></span><span id="place"></span><span>GPS радиус: 5 м</span></div><h2 id="missionTitle"></h2><p id="prompt" class="mission-prompt"></p><div id="map"></div><div class="location-box"><button id="locateBtn" class="secondary">📍 Провери местоположението</button><span id="locStatus">GPS проверката е задължителна.</span></div><div class="answer-row"><input id="answer" placeholder="Въведи отговора" disabled><button id="answerBtn" class="primary" disabled>Провери</button></div><p class="muted gps-note">При изпращане на отговор сайтът прави нова GPS проверка. Това предотвратява потвърждаване на точката и последващо отдалечаване.</p><div class="hint-row"><button id="hintBtn" class="danger-outline">💡 Подсказка (+5 мин)</button><div id="hintText" class="hint-text"></div></div><p id="gameMsg" class="msg"></p></section><section id="finishCard" class="card hidden"><div class="finish-icon">🏆</div><h2>Финал!</h2><p id="finishText"></p><a class="primary button-link" href="/leaderboard">Виж класирането</a></section></main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="/static/play.js"></script></body></html>
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071018">
+  <title>Игра · AroundTheCity</title>
+  <link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body class="page-game">
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell game-shell">
+    <header class="game-top card glass-thin">
+      <div class="team-heading"><img id="teamLogo" class="team-logo hidden" alt="Лого на отбора"><div><div class="eyebrow"><span class="pulse-dot"></span> ACTIVE QUEST</div><h1 id="teamTitle">Отбор</h1><div id="competitionInfo" class="muted"></div></div></div>
+      <div class="timer-wrap"><div class="timer-label">ОБЩО ВРЕМЕ</div><div id="timer" class="timer">00:00:00</div><div id="penalty" class="penalty">наказание +00:00</div></div>
+    </header>
+
+    <section class="progress-card quest-progress-card">
+      <div class="progress-head"><div><span class="progress-overline">ПРОГРЕС</span><strong id="progressText">Мисия 0/10</strong></div><span class="progress-badge">SOFIA RUN</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="progress-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </section>
+
+    <section id="readyCard" class="card state-card hidden">
+      <div class="state-icon">◎</div><div class="eyebrow">START ZONE · КРИСТАЛ</div><h2 id="readyTitle">Готови ли сте?</h2><p id="readyText">Отидете в градина „Кристал“. Таймерът стартира след натискане на бутона и не спира при затваряне на сайта.</p><button id="startBtn" class="primary action-xl">Старт</button>
+    </section>
+
+    <section id="missionCard" class="mission-layout hidden">
+      <article class="card mission-card">
+        <div class="mission-topline"><div class="mission-number" id="missionNumber">01</div><div class="mission-meta"><span id="difficulty"></span><span class="gps-chip">GPS · 5 м</span></div></div>
+        <div id="place" class="place-label"></div><h2 id="missionTitle"></h2><p id="prompt" class="mission-prompt"></p>
+        <div class="answer-panel">
+          <div class="location-box"><div class="gps-indicator"><span class="gps-ring"></span><span id="locStatus">GPS проверката е задължителна.</span></div><button id="locateBtn" class="secondary">Провери GPS</button></div>
+          <div class="answer-row"><input id="answer" placeholder="Въведи намерения отговор" disabled autocomplete="off"><button id="answerBtn" class="primary" disabled>Провери →</button></div>
+          <p class="muted gps-note">Отговорът се приема само след нова GPS проверка на място.</p>
+        </div>
+        <div class="hint-row"><button id="hintBtn" class="hint-button"><span>💡 Подсказка</span><small>+5 минути</small></button><div id="hintText" class="hint-text"></div></div>
+        <p id="gameMsg" class="msg"></p>
+      </article>
+      <aside class="map-card card"><div class="map-head"><div><span class="progress-overline">TARGET AREA</span><strong>Навигация</strong></div><span class="map-status">● LIVE</span></div><div id="map"></div><div class="map-foot">Кръгът показва необходимата 5-метрова зона около текущата точка.</div></aside>
+    </section>
+
+    <section id="finishCard" class="card finish-card hidden"><div class="finish-orbit"><div class="finish-icon">🏆</div></div><div class="eyebrow">QUEST COMPLETE</div><h2>София е покорена.</h2><p id="finishText"></p><a class="primary button-link action-xl" href="/leaderboard">Виж класирането →</a></section>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="/static/play.js"></script>
+</body></html>

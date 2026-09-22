@@ -1,4 +1,67 @@
-<!doctype html><html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sofia City Quest</title><link rel="stylesheet" href="/static/style.css"></head>
-<body><main class="shell hero"><section class="card hero-card"><div class="eyebrow">SOFIA CITY QUEST</div><h1>10 мисии. Един център. Вашето време тече.</h1><p class="lead">Старт от градина „Кристал“. Играйте за забавление или срещу други отбори. Всяка подсказка добавя +5:00 минути към крайното време.</p><div class="chips"><span>📍 5 м GPS зона</span><span>⏱️ устойчив таймер</span><span>🏁 live leaderboard</span><span>🧩 10 задачи</span></div></section>
-<section class="card"><h2>Създай отбор</h2><form id="teamForm"><label>Име на отбора<input id="teamName" required minlength="2" placeholder="Напр. Нощните лисици"></label><label>Снимка / лого на отбора<input id="teamLogo" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG или WEBP, до 2 MB.</small></label><label>Имена на играчите<textarea id="players" rows="3" placeholder="Едно име на ред"></textarea></label><div class="mode"><label><input type="radio" name="mode" value="fun" checked> Самостоятелна игра</label><label><input type="radio" name="mode" value="race"> Състезание</label></div><div id="raceFields" class="hidden"><label>Код на съществуващо състезание<input id="competitionCode" placeholder="Остави празно, за да създадеш ново"></label><label>Име на ново състезание<input id="competitionName" placeholder="Напр. Sofia Saturday Race"></label></div><button class="primary" type="submit">Създай отбор</button></form><p id="msg" class="msg"></p></section>
-<section class="card compact"><div><h3>Вече имаш активна игра?</h3><p class="muted">Прогресът и таймерът са запазени на сървъра.</p></div><div class="compact-actions"><button id="resume" class="secondary">Продължи играта</button> <button id="organizerResume" class="secondary hidden">Организатор</button> <a class="text-link" href="/leaderboard">Класиране</a></div></section></main><script src="/static/home.js"></script></body></html>
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071018">
+  <title>AroundTheCity · Sofia City Quest</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="page-home">
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell hero-shell">
+    <nav class="topbar">
+      <a class="brand" href="/"><span class="brand-mark">A</span><span><strong>AroundTheCity</strong><small>Sofia quest experience</small></span></a>
+      <a class="nav-pill" href="/leaderboard"><span>🏁</span> Live класиране</a>
+    </nav>
+
+    <section class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse-dot"></span> LIVE CITY ADVENTURE · SOFIA</div>
+        <h1>Градът е <span class="accent-text">игралното поле.</span></h1>
+        <p class="lead">10 мисии през центъра на София. Истински локации, GPS проверка, загадки на място и време, което не спира.</p>
+        <div class="hero-stats">
+          <div class="stat"><strong>10</strong><span>мисии</span></div>
+          <div class="stat"><strong>5 m</strong><span>GPS зона</span></div>
+          <div class="stat"><strong>+5</strong><span>мин. за подсказка</span></div>
+          <div class="stat"><strong>LIVE</strong><span>race mode</span></div>
+        </div>
+        <div class="quest-path" aria-label="Маршрут на приключението">
+          <div class="quest-node active">01</div><div class="quest-line"></div><div class="quest-node">04</div><div class="quest-line"></div><div class="quest-node">07</div><div class="quest-line"></div><div class="quest-node finish">10</div>
+        </div>
+        <p class="hero-note">Стартова точка: <strong>градина „Кристал“</strong> · Играй самостоятелно или срещу други отбори.</p>
+      </div>
+
+      <section class="card create-card">
+        <div class="card-kicker">СЪЗДАЙ СВОЯ ОТБОР</div>
+        <h2>Приключението започва тук.</h2>
+        <form id="teamForm">
+          <label><span>Име на отбора</span><input id="teamName" required minlength="2" placeholder="Напр. Нощните лисици" autocomplete="off"></label>
+          <div class="form-split">
+            <label class="upload-field"><span>Снимка / лого</span><input id="teamLogo" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG или WEBP · до 2 MB</small></label>
+            <label><span>Играчи</span><textarea id="players" rows="3" placeholder="Едно име на ред"></textarea></label>
+          </div>
+          <div class="mode-selector" role="radiogroup" aria-label="Режим на игра">
+            <label class="mode-option"><input type="radio" name="mode" value="fun" checked><span class="mode-icon">🧭</span><span><b>Adventure</b><small>Един отбор, собствено темпо</small></span></label>
+            <label class="mode-option"><input type="radio" name="mode" value="race"><span class="mode-icon">⚡</span><span><b>Race</b><small>Няколко отбора, общ старт</small></span></label>
+          </div>
+          <div id="raceFields" class="race-panel hidden">
+            <div class="race-panel-title">RACE SETUP</div>
+            <label><span>Код на съществуващо състезание</span><input id="competitionCode" placeholder="Напр. SOF123" autocomplete="off"></label>
+            <label><span>Име на ново състезание</span><input id="competitionName" placeholder="Напр. Sofia Saturday Race" autocomplete="off"></label>
+          </div>
+          <button class="primary action-xl" type="submit"><span>Започни приключението</span><span class="button-arrow">→</span></button>
+        </form>
+        <p id="msg" class="msg"></p>
+      </section>
+    </section>
+
+    <section class="resume-strip">
+      <div class="resume-icon">↺</div>
+      <div><h3>Имаш активна игра?</h3><p>Прогресът и таймерът се пазят на това устройство.</p></div>
+      <div class="resume-actions"><button id="resume" class="secondary">Продължи играта</button><button id="organizerResume" class="secondary hidden">Race control</button></div>
+    </section>
+  </main>
+  <script src="/static/home.js"></script>
+</body>
+</html>

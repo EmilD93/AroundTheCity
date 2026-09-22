@@ -1,1 +1,9 @@
-<!doctype html><html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Класиране | Sofia City Quest</title><link rel="stylesheet" href="/static/style.css"></head><body><main class="shell"><section class="card"><div class="eyebrow">LIVE RESULTS</div><h1>Класиране</h1><div class="leader-filter"><input id="code" placeholder="Код на състезание (по избор)"><button id="load" class="secondary">Покажи</button></div><div id="board"></div><a class="text-link" href="/">← Начало</a></section></main><script src="/static/leaderboard.js"></script></body></html>
+<!doctype html>
+<html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071018"><title>Класиране · AroundTheCity</title><link rel="stylesheet" href="/static/style.css"></head>
+<body class="page-board"><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<main class="shell leaderboard-shell">
+  <nav class="topbar"><a class="brand" href="/"><span class="brand-mark">A</span><span><strong>AroundTheCity</strong><small>Sofia quest experience</small></span></a><a class="nav-pill" href="/">← Начало</a></nav>
+  <section class="leader-hero"><div><div class="eyebrow"><span class="pulse-dot"></span> LIVE RESULTS</div><h1>Класиране</h1><p class="lead">Следи прогреса, наказателното време и финалните резултати в реално време.</p></div><div class="leader-filter card"><label><span>Код на състезание</span><input id="code" placeholder="Напр. SOF123" autocomplete="off"></label><button id="load" class="primary">Покажи</button></div></section>
+  <section id="podium" class="podium hidden" aria-label="Топ 3"></section>
+  <section class="card board-card"><div class="board-header"><span>#</span><span>ОТБОР</span><span>ПРОГРЕС</span><span>НАКАЗАНИЕ</span><span>ВРЕМЕ</span></div><div id="board"></div></section>
+</main><script src="/static/leaderboard.js"></script></body></html>
