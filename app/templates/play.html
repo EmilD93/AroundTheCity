@@ -10,7 +10,7 @@
   <main class="shell game-shell">
     <header class="game-top card glass-thin">
       <div class="team-heading"><img id="teamLogo" class="team-logo hidden" alt="Лого на отбора"><div><div class="eyebrow"><span class="pulse-dot"></span> ACTIVE QUEST</div><h1 id="teamTitle">Отбор</h1><div id="competitionInfo" class="muted"></div></div></div>
-      <div class="timer-wrap"><div class="timer-label">ОБЩО ВРЕМЕ</div><div id="timer" class="timer">00:00:00</div><div id="penalty" class="penalty">наказание +00:00</div></div>
+      <div class="timer-wrap"><div class="timer-label">TIME</div><div id="timer" class="timer">00:00:00</div><div id="penalty" class="penalty hidden">+00:00</div></div>
     </header>
 
     <section class="progress-card quest-progress-card">
@@ -25,17 +25,16 @@
 
     <section id="missionCard" class="mission-layout hidden">
       <article class="card mission-card">
-        <div class="mission-topline"><div class="mission-number" id="missionNumber">01</div><div class="mission-meta"><span id="difficulty"></span><span class="gps-chip">GPS · 5 м</span></div></div>
+        <div class="mission-topline"><div class="mission-number" id="missionNumber">01</div><div class="mission-meta"><span id="difficulty"></span></div></div>
         <div id="place" class="place-label"></div><h2 id="missionTitle"></h2><p id="prompt" class="mission-prompt"></p>
         <div class="answer-panel">
-          <div class="location-box"><div class="gps-indicator"><span class="gps-ring"></span><span id="locStatus">GPS проверката е задължителна.</span></div><button id="locateBtn" class="secondary">Провери GPS</button></div>
-          <div class="answer-row"><input id="answer" placeholder="Въведи намерения отговор" disabled autocomplete="off"><button id="answerBtn" class="primary" disabled>Провери →</button></div>
-          <p class="muted gps-note">Отговорът се приема само след нова GPS проверка на място.</p>
+          <div class="location-box"><div class="gps-indicator"><span class="gps-ring"></span><span id="locStatus"></span></div><button id="locateBtn" class="secondary locate-action">◎ Позиция</button></div>
+          <div class="answer-row"><input id="answer" placeholder="Твоят отговор" disabled autocomplete="off"><button id="answerBtn" class="primary" disabled>Провери →</button></div>
         </div>
         <div class="hint-row"><button id="hintBtn" class="hint-button"><span>💡 Подсказка</span><small>+5 минути</small></button><div id="hintText" class="hint-text"></div></div>
         <p id="gameMsg" class="msg"></p>
       </article>
-      <aside class="map-card card"><div class="map-head"><div><span class="progress-overline">TARGET AREA</span><strong>Навигация</strong></div><span class="map-status">● LIVE</span></div><div id="map"></div><div class="map-foot">Кръгът показва необходимата 5-метрова зона около текущата точка.</div></aside>
+      <aside class="map-card card"><div class="map-head"><strong>Навигация</strong><span class="map-status">● LIVE</span></div><div id="map"></div></aside>
     </section>
 
     <section id="finishCard" class="card finish-card hidden"><div class="finish-orbit"><div class="finish-icon">🏆</div></div><div class="eyebrow">QUEST COMPLETE</div><h2>София е покорена.</h2><p id="finishText"></p><a class="primary button-link action-xl" href="/leaderboard">Виж класирането →</a></section>

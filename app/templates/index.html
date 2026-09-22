@@ -19,17 +19,14 @@
       <div class="hero-copy">
         <div class="eyebrow"><span class="pulse-dot"></span> LIVE CITY ADVENTURE · SOFIA</div>
         <h1>Градът е <span class="accent-text">игралното поле.</span></h1>
-        <p class="lead">10 мисии през центъра на София. Истински локации, GPS проверка, загадки на място и време, което не спира.</p>
-        <div class="hero-stats">
-          <div class="stat"><strong>10</strong><span>мисии</span></div>
-          <div class="stat"><strong>5 m</strong><span>GPS зона</span></div>
-          <div class="stat"><strong>+5</strong><span>мин. за подсказка</span></div>
-          <div class="stat"><strong>LIVE</strong><span>race mode</span></div>
+        <p class="lead">10 мисии. Центърът на София. Таймерът вече тече.</p>
+        <div class="hero-punch" aria-label="Основни характеристики">
+          <span>10 MISSIONS</span><span>SOFIA</span><span>LIVE</span>
         </div>
         <div class="quest-path" aria-label="Маршрут на приключението">
           <div class="quest-node active">01</div><div class="quest-line"></div><div class="quest-node">04</div><div class="quest-line"></div><div class="quest-node">07</div><div class="quest-line"></div><div class="quest-node finish">10</div>
         </div>
-        <p class="hero-note">Стартова точка: <strong>градина „Кристал“</strong> · Играй самостоятелно или срещу други отбори.</p>
+        <p class="hero-note">Старт: <strong>градина „Кристал“</strong></p>
       </div>
 
       <section class="card create-card">
@@ -42,8 +39,8 @@
             <label><span>Играчи</span><textarea id="players" rows="3" placeholder="Едно име на ред"></textarea></label>
           </div>
           <div class="mode-selector" role="radiogroup" aria-label="Режим на игра">
-            <label class="mode-option"><input type="radio" name="mode" value="fun" checked><span class="mode-icon">🧭</span><span><b>Adventure</b><small>Един отбор, собствено темпо</small></span></label>
-            <label class="mode-option"><input type="radio" name="mode" value="race"><span class="mode-icon">⚡</span><span><b>Race</b><small>Няколко отбора, общ старт</small></span></label>
+            <label class="mode-option"><input type="radio" name="mode" value="fun" checked><span class="mode-icon">🧭</span><span><b>Adventure</b></span></label>
+            <label class="mode-option"><input type="radio" name="mode" value="race"><span class="mode-icon">⚡</span><span><b>Race</b></span></label>
           </div>
           <div id="raceFields" class="race-panel hidden">
             <div class="race-panel-title">RACE SETUP</div>
@@ -58,7 +55,7 @@
 
     <section class="resume-strip">
       <div class="resume-icon">↺</div>
-      <div><h3>Имаш активна игра?</h3><p>Прогресът и таймерът се пазят на това устройство.</p></div>
+      <div><h3>Имаш активна игра?</h3></div>
       <div class="resume-actions"><button id="resume" class="secondary">Продължи играта</button><button id="organizerResume" class="secondary hidden">Race control</button></div>
     </section>
   </main>
