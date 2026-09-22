@@ -18,7 +18,7 @@ from pydantic import BaseModel, Field
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = Path(os.getenv("QUEST_DB_PATH", "/tmp/quest.db" if os.getenv("VERCEL") else BASE_DIR.parent / "quest.db"))
-ADMIN_KEY = os.getenv("ADMIN_KEY", "change-me")
+ADMIN_KEY = os.getenv("ADMIN_KEY")
 GPS_RADIUS_M = 5
 GPS_MAX_ACCURACY_M = 10
 GPS_VERIFY_TTL_SECONDS = 180
@@ -771,9 +771,10 @@ def competition_qr(request: Request, token: str):
 
 
 @app.get("/api/admin")
-def admin(key: str):
-    if key != ADMIN_KEY:
-        raise HTTPException(403, "Forbidden")
+def admin(request: Request):
+    supplied = request.headers.get("X-Admin-Key", "")
+    if not ADMIN_KEY or not secrets.compare_digest(supplied, ADMIN_KEY):
+        raise HTTPException(404, "Not found")
     con = db()
     try:
         teams = [dict(r) for r in con.execute("SELECT id,competition_id,name,join_code,route_variant,logo_mime,created_at FROM teams ORDER BY id DESC")]
