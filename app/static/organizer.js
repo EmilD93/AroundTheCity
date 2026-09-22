@@ -1,3 +1,11 @@
+const STORAGE_RESET_VERSION='prelaunch-2026-09-23-1';
+function resetOldQuestStorage(){
+  if(localStorage.getItem('aroundTheCityStorageReset')===STORAGE_RESET_VERSION)return false;
+  ['sofiaQuestToken','sofiaQuestCompetition','sofiaQuestOrganizerToken'].forEach(k=>localStorage.removeItem(k));
+  localStorage.setItem('aroundTheCityStorageReset',STORAGE_RESET_VERSION);
+  return true;
+}
+if(resetOldQuestStorage())location.replace('/');
 const orgToken=localStorage.getItem('sofiaQuestOrganizerToken');if(!orgToken)location.href='/';
 let map=null,markers={};const $=s=>document.querySelector(s);function fmt(sec){sec=Math.max(0,Math.floor(sec||0));const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return `${h?String(h).padStart(2,'0')+':':''}${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
 async function api(url,opt={}){const r=await fetch(url,opt);const d=await r.json();if(!r.ok)throw new Error(d.detail||'Грешка');return d}

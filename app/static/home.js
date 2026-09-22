@@ -1,7 +1,17 @@
-const form=document.querySelector('#teamForm'),msg=document.querySelector('#msg'),raceFields=document.querySelector('#raceFields');
+const STORAGE_RESET_VERSION='prelaunch-2026-09-23-1';
+function resetOldQuestStorage(){
+  if(localStorage.getItem('aroundTheCityStorageReset')===STORAGE_RESET_VERSION)return false;
+  ['sofiaQuestToken','sofiaQuestCompetition','sofiaQuestOrganizerToken'].forEach(k=>localStorage.removeItem(k));
+  localStorage.setItem('aroundTheCityStorageReset',STORAGE_RESET_VERSION);
+  return true;
+}
+resetOldQuestStorage();
+const form=document.querySelector('#teamForm'),msg=document.querySelector('#msg'),raceFields=document.querySelector('#raceFields'),resumeStrip=document.querySelector('#resumeStrip');
 function setRaceVisible(){const race=document.querySelector('input[name=mode]:checked').value==='race';raceFields.classList.toggle('hidden',!race)}
 document.querySelectorAll('input[name=mode]').forEach(r=>r.addEventListener('change',setRaceVisible));
 const params=new URLSearchParams(location.search),prefill=params.get('competition');if(prefill){document.querySelector('input[name=mode][value=race]').checked=true;competitionCode.value=prefill.toUpperCase();setRaceVisible()}
 form.addEventListener('submit',async e=>{e.preventDefault();const submit=form.querySelector('button[type=submit]');submit.disabled=true;msg.textContent='Подготвям приключението…';try{const mode=document.querySelector('input[name=mode]:checked').value,payload={team_name:teamName.value,players:players.value.split(/\n|,/).map(x=>x.trim()).filter(Boolean),mode,competition_code:competitionCode.value||null,competition_name:competitionName.value||null};let r=await fetch('/api/teams',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),d=await r.json();if(!r.ok)throw new Error(d.detail||'Не успях да създам отбора.');localStorage.setItem('sofiaQuestToken',d.token);if(d.competition_code)localStorage.setItem('sofiaQuestCompetition',d.competition_code);if(d.organizer_token)localStorage.setItem('sofiaQuestOrganizerToken',d.organizer_token);const f=teamLogo.files[0];if(f){msg.textContent='Качвам снимката на отбора…';const fd=new FormData();fd.append('file',f);r=await fetch('/api/team-logo?token='+encodeURIComponent(d.token),{method:'POST',body:fd});const ud=await r.json();if(!r.ok)throw new Error('Отборът е създаден, но снимката не се качи: '+(ud.detail||'Грешка'))}msg.textContent='Готово. Зареждам играта…';location.href=d.organizer_token?'/organizer':'/play'}catch(err){msg.textContent=err.message||'Грешка';submit.disabled=false}});
 document.querySelector('#resume').onclick=()=>{const t=localStorage.getItem('sofiaQuestToken');if(t)location.href='/play';else msg.textContent='На това устройство няма запазена активна игра.'};
-const org=localStorage.getItem('sofiaQuestOrganizerToken');if(org){organizerResume.classList.remove('hidden');organizerResume.onclick=()=>location.href='/organizer'}
+const savedToken=localStorage.getItem('sofiaQuestToken'),org=localStorage.getItem('sofiaQuestOrganizerToken');
+if(savedToken||org)resumeStrip.classList.remove('hidden');
+if(org){organizerResume.classList.remove('hidden');organizerResume.onclick=()=>location.href='/organizer'}

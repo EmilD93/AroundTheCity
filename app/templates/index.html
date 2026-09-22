@@ -3,60 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#071018">
+  <meta name="theme-color" content="#081018">
   <title>AroundTheCity · Sofia City Quest</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="page-home">
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div class="ambient ambient-three"></div>
   <main class="shell hero-shell">
     <nav class="topbar">
-      <a class="brand" href="/"><span class="brand-mark">A</span><span><strong>AroundTheCity</strong><small>Sofia quest experience</small></span></a>
-      <a class="nav-pill" href="/leaderboard"><span>🏁</span> Live класиране</a>
+      <a class="brand" href="/"><span class="brand-mark">A</span><span><strong>AroundTheCity</strong><small>Sofia quest</small></span></a>
+      <a class="nav-pill" href="/leaderboard"><span>🏁</span> Класиране</a>
     </nav>
 
-    <section class="hero-grid">
+    <section class="hero-grid fun-hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse-dot"></span> LIVE CITY ADVENTURE · SOFIA</div>
-        <h1>Градът е <span class="accent-text">игралното поле.</span></h1>
-        <p class="lead">10 мисии. Центърът на София. Таймерът вече тече.</p>
-        <div class="hero-punch" aria-label="Основни характеристики">
-          <span>10 MISSIONS</span><span>SOFIA</span><span>LIVE</span>
+        <div class="eyebrow"><span class="pulse-dot"></span> SOFIA CITY QUEST</div>
+        <h1>10 мисии.<br>1 град.<br><span class="accent-text">Готови?</span></h1>
+        <p class="lead fun-lead">Събери отбора и тръгвай.</p>
+
+        <div class="city-route" aria-label="Маршрут през София">
+          <div class="route-stop route-start"><span>🌳</span><b>START</b></div>
+          <div class="route-dash"></div>
+          <div class="route-stop"><span>⛪</span></div>
+          <div class="route-dash"></div>
+          <div class="route-stop"><span>🎭</span></div>
+          <div class="route-dash"></div>
+          <div class="route-stop"><span>🏛️</span></div>
+          <div class="route-dash"></div>
+          <div class="route-stop route-finish"><span>♨️</span><b>FINISH</b></div>
         </div>
-        <div class="quest-path" aria-label="Маршрут на приключението">
-          <div class="quest-node active">01</div><div class="quest-line"></div><div class="quest-node">04</div><div class="quest-line"></div><div class="quest-node">07</div><div class="quest-line"></div><div class="quest-node finish">10</div>
+
+        <div class="fun-badges">
+          <span>🧩 10</span><span>⚡ LIVE</span><span>🏆 GO</span>
         </div>
-        <p class="hero-note">Старт: <strong>градина „Кристал“</strong></p>
+        <p class="hero-note">📍 <strong>градина „Кристал“</strong></p>
       </div>
 
-      <section class="card create-card">
-        <div class="card-kicker">СЪЗДАЙ СВОЯ ОТБОР</div>
-        <h2>Приключението започва тук.</h2>
+      <section class="card create-card playful-card">
+        <div class="playful-corner">✦</div>
+        <div class="card-kicker">READY?</div>
+        <h2>Създай отбора.</h2>
         <form id="teamForm">
-          <label><span>Име на отбора</span><input id="teamName" required minlength="2" placeholder="Напр. Нощните лисици" autocomplete="off"></label>
-          <div class="form-split">
-            <label class="upload-field"><span>Снимка / лого</span><input id="teamLogo" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG или WEBP · до 2 MB</small></label>
-            <label><span>Играчи</span><textarea id="players" rows="3" placeholder="Едно име на ред"></textarea></label>
+          <label><span>Име на отбора</span><input id="teamName" required minlength="2" placeholder="Нощните лисици" autocomplete="off"></label>
+
+          <div class="mode-selector fun-mode" role="radiogroup" aria-label="Режим на игра">
+            <label class="mode-option mode-adventure"><input type="radio" name="mode" value="fun" checked><span class="mode-icon">🧭</span><span><b>Adventure</b></span></label>
+            <label class="mode-option mode-race"><input type="radio" name="mode" value="race"><span class="mode-icon">⚡</span><span><b>Race</b></span></label>
           </div>
-          <div class="mode-selector" role="radiogroup" aria-label="Режим на игра">
-            <label class="mode-option"><input type="radio" name="mode" value="fun" checked><span class="mode-icon">🧭</span><span><b>Adventure</b></span></label>
-            <label class="mode-option"><input type="radio" name="mode" value="race"><span class="mode-icon">⚡</span><span><b>Race</b></span></label>
-          </div>
+
           <div id="raceFields" class="race-panel hidden">
-            <div class="race-panel-title">RACE SETUP</div>
-            <label><span>Код на съществуващо състезание</span><input id="competitionCode" placeholder="Напр. SOF123" autocomplete="off"></label>
-            <label><span>Име на ново състезание</span><input id="competitionName" placeholder="Напр. Sofia Saturday Race" autocomplete="off"></label>
+            <label><span>Код</span><input id="competitionCode" placeholder="SOF123" autocomplete="off"></label>
+            <label><span>Ново състезание</span><input id="competitionName" placeholder="Saturday Race" autocomplete="off"></label>
           </div>
-          <button class="primary action-xl" type="submit"><span>Започни приключението</span><span class="button-arrow">→</span></button>
+
+          <details class="team-extras">
+            <summary><span>＋</span> Добави снимка и играчи</summary>
+            <div class="extras-grid">
+              <label class="upload-field"><span>Снимка / лого</span><input id="teamLogo" type="file" accept="image/jpeg,image/png,image/webp"></label>
+              <label><span>Играчи</span><textarea id="players" rows="3" placeholder="Едно име на ред"></textarea></label>
+            </div>
+          </details>
+
+          <button class="primary action-xl playful-cta" type="submit"><span>Влизаме в играта</span><span class="button-arrow">→</span></button>
         </form>
         <p id="msg" class="msg"></p>
       </section>
     </section>
 
-    <section class="resume-strip">
+    <section id="resumeStrip" class="resume-strip hidden">
       <div class="resume-icon">↺</div>
-      <div><h3>Имаш активна игра?</h3></div>
-      <div class="resume-actions"><button id="resume" class="secondary">Продължи играта</button><button id="organizerResume" class="secondary hidden">Race control</button></div>
+      <div><h3>Активна игра</h3></div>
+      <div class="resume-actions"><button id="resume" class="secondary">Продължи</button><button id="organizerResume" class="secondary hidden">Race control</button></div>
     </section>
   </main>
   <script src="/static/home.js"></script>
